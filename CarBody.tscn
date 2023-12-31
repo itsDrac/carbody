@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://bynspf1f34xrw"]
+
+[ext_resource type="Script" path="res://CarBody.gd" id="1_osla0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j0kk3"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_g5j44"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3u4yo"]
+size = Vector3(2, 2.19996, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xrgi"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_22maf"]
+
+[node name="CarBody" type="VehicleBody3D"]
+gravity_scale = 4.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 1.4, -0.5)
+script = ExtResource("1_osla0")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 3, 0, 1.65, 0)
+mesh = SubResource("BoxMesh_j0kk3")
+
+[node name="point" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, -2.18557e-08, 1, 0, -0.5, -4.37114e-08, 0, 0, -0.75)
+mesh = SubResource("PrismMesh_g5j44")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0423, 0)
+shape = SubResource("BoxShape3D_3u4yo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, -2)
+shape = SubResource("BoxShape3D_8xrgi")
+
+[node name="VehicleWheelFR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.5, -1)
+use_as_steering = true
+wheel_roll_influence = 0.01
+wheel_friction_slip = 1.4
+suspension_travel = 0.15
+suspension_stiffness = 80.0
+
+[node name="WheelFR" type="MeshInstance3D" parent="VehicleWheelFR"]
+transform = Transform3D(4.37114e-08, 0.2, 8.74228e-08, 1, -8.74228e-09, 0, 3.82137e-15, 1.74846e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_22maf")
+skeleton = NodePath("../..")
+
+[node name="VehicleWheelFL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.5, -1)
+use_as_steering = true
+wheel_roll_influence = 0.01
+wheel_friction_slip = 1.4
+suspension_travel = 0.15
+suspension_stiffness = 80.0
+
+[node name="WheelFL" type="MeshInstance3D" parent="VehicleWheelFL"]
+transform = Transform3D(4.37114e-08, 0.2, 8.74228e-08, 1, -8.74228e-09, 0, 3.82137e-15, 1.74846e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_22maf")
+skeleton = NodePath("../..")
+
+[node name="VehicleWheelBL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.5, 1)
+use_as_traction = true
+wheel_friction_slip = 1.1
+suspension_travel = 0.15
+suspension_stiffness = 60.0
+
+[node name="WheelBL" type="MeshInstance3D" parent="VehicleWheelBL"]
+transform = Transform3D(4.37114e-08, 0.2, 8.74228e-08, 1, -8.74228e-09, 0, 3.82137e-15, 1.74846e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_22maf")
+skeleton = NodePath("../..")
+
+[node name="VehicleWheelBR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.5, 1)
+use_as_traction = true
+wheel_friction_slip = 1.1
+suspension_travel = 0.15
+suspension_stiffness = 60.0
+
+[node name="WheelBR" type="MeshInstance3D" parent="VehicleWheelBR"]
+transform = Transform3D(4.37114e-08, 0.2, 8.74228e-08, 1, -8.74228e-09, 0, 3.82137e-15, 1.74846e-08, -1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_22maf")
+skeleton = NodePath("../..")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1, 0)
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 5)
