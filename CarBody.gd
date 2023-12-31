@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-const MAX_STER = 0.8
+const MAX_STER = 0.3
 const ENGINE_POWER = 300
 func _process(delta):
 	steering = move_toward(steering, 
